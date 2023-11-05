@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buylist</title>
+
+    <style>
+        *::-webkit-scrollbar{
+            display: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            transition: 0.2s;
+        }
+
+        body {
+            background: #1F1F1F;
+            color: #fff;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            font-size: 20px;
+            background: #000;
+            position: relative;
+        }
+
+        .nav h1,
+        p {
+            background: #000;
+        }
+
+        .switch {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            cursor: pointer;
+        }
+
+        body.active {
+            background: #f5f5f5;
+            color: black;
+        }
+
+        body.active .nav,
+        body.active .nav h1,
+        body.active .nav p {
+            background: #fdf5e6;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+            overflow-y: scroll;
+            max-height: 615px;
+        }
+
+        .buy {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            gap: 30px;
+            margin-left: 150px;
+            border: 1px solid #face30;
+            border-radius: 20px;
+            padding: 20px;
+            width: 800px;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 40px;
+        }
+
+        h3 {
+            font-size: 30px;
+        }
+
+        img {
+            width: 250px;
+        }
+
+        button {
+            position: absolute;
+            right: 50px;
+            font-size: 30px;
+            padding: 10px;
+            border: none;
+            background: red;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 150px;
+            max-height: 100%;
+        }
+
+        .sidebar {
+            display: flex;
+            border: 5px solid #face30;
+            padding: 130px 20px;
+            border-radius: 20px;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .sidebar button {
+            position: absolute;
+            top: 200px;
+            right: 130px;
+            background: orange;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="nav">
+            <h1>You Buylist</h1>
+            <div class="switch"><p class="textp">Day!</p></div>
+        </div>
+        <div class="container">
+            <div class="main">
+                {% for i in buylist %}
+                <div class="buy">
+                    <div class="img">
+                        <img src="{{i.watch.image.url}}" alt="">
+                    </div>
+                    <div class="text">
+                        <h2>{{i.watch.name}}</h2>
+                        <h2>{{i.watch.brand.name}}</h2>
+                        <h3>${{i.watch.price}}</h3>
+                    </div>
+                    <button><a href="/deletebuylist/{{i.id}}/">Delete</a></button>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="sidebar">
+                <h1>Total Price: ${{total_price}}</h1>
+                <button>Buy</button>
+            </div>
+        </div>
+    </center>
+
+    <script>
+        var switcher = document.querySelector(".switch")
+        var body = document.querySelector("body")
+        var text = document.querySelector(".textp")
+
+        switcher.addEventListener("click", () => {
+            body.classList.toggle("active")
+
+            if (body.classList.contains("active")) {
+                text.textContent = "Night!"
+            } else {
+                text.textContent = "Day!"
+            }
+        })
+    </script>
+</body>
+</html>

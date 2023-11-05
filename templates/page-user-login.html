@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            background: #1F1F1F;
+            color: #fff;
+        }
+
+        ::-webkit-scrollbar{
+             background: orange;
+        }
+
+        ::-webkit-scrollbar-thumb{
+             background: red;
+        }
+
+        ::selection{
+            background-color: orange;
+            color: black;
+        }
+
+        .nav{
+            position: relative;
+            background: #000 !important;
+            padding: 2px;
+        }
+
+        .nav h1{
+            margin-top: 15px;
+        }
+
+        .nav, .nav h1, .nav p{
+            background: #000;
+        }
+
+        .nav p{
+            position: absolute;
+            right: 50px;
+            bottom: 10px;
+            color: #fff;
+            z-index: 10000;
+        }
+
+        .nav p span a{
+            color: Blue;
+            background: #000;
+            text-decoration: none;
+        }
+
+        .nav p span a::selection{
+            color: red
+        }
+
+        form{
+        	display: flex;
+        	flex-direction: column;
+        	width: 200px;
+        	gap: 50px;
+        }
+
+        input{
+        	border: none;
+        	outline: none;
+            background: #000;
+            padding: 15px;
+            margin-top: 5px;
+            border-radius: 15px;
+            color: #fff
+            font-size: 18px;
+        }
+
+        button{
+        	padding: 12px;
+        	border: none;
+        	background: blue;
+        	border-radius: 15px;
+        	font-size: 20px;
+        	cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+	<center>
+		<div class="nav">
+			<h1>Login</h1>
+			<br>
+		</div>
+		<br>
+		<br>
+		<br>
+		<div class="loginPage">
+			<form method="post"> {%csrf_token%}
+				<div class="first">
+					<label>Username:</label>
+					<br>
+					<input type="text" name="u">
+				</div>
+				<div class="first">
+					<label>Password:</label>
+					<br>
+					<input type="password" name="p">
+				</div>
+				<button type="submit">Submit</button>
+			</form>
+			<br>
+			<a href="/register/">If no account</a>
+		</div>
+	</center>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{watch.name}}</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            transition: 0.2s;
+        }
+
+        body{
+            background: #1F1F1F;
+            color: #fff;
+        }
+
+        .nav{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            font-size: 20px;
+            background: #000;
+            position: relative;
+        }
+
+        .nav h1, p{
+            background: #000;
+        }
+
+        .switch{
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            cursor: pointer;
+        }
+
+        body.active{
+            background: #f5f5f5;
+            color: black;
+        }
+
+        body.active .nav, body.active .nav h1, body.active .nav p{
+            background: #fdf5e6;
+        }
+
+        img{
+            width: 500px;
+        }
+
+        .main{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .right{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right h1{
+            font-size: 50px;
+        }
+
+        .right h2{
+            font-size: 40px;
+        }
+
+        .right h3{
+            font-size: 30px;
+        }
+
+        .right span{
+            color: red;
+        }
+
+        button{
+            width: 200px;
+            padding: 20px;
+            font-size: 20px;
+            border: none;
+            background: #face30;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+  <center>
+    <div class="nav">
+        <h1>{{watch.name}}</h1>
+        <div class="switch"><p class="textp">Day!</p></div>
+    </div>
+      
+      <div class="main">
+          <div class="left">
+              <img src="{{watch.image.url}}" alt="">
+          </div>
+          <div class="right">
+              <h1><span>Name:</span> {{watch.name}}</h1>
+              <h2><span>Brand:</span> {{watch.brand}}</h2>
+              <h2><span>Description:</span> {{watch.description}}</h2>
+              <h3><span>Price:</span> ${{watch.price}}</h3>
+              <h3><span>Quantity</span> {{watch.stock_quantity}} left</h3>
+              <a href="/buylistadd/{{watch.id}}/"><button>Buy</button></a>
+          </div>
+      </div>
+  </center>
+
+    <script>
+        var switcher = document.querySelector(".switch")
+        var body = document.querySelector("body")
+        var text = document.querySelector(".textp")
+
+        switcher.addEventListener("click", () => {
+            body.classList.toggle("active")
+
+            if (body.classList.contains("active")) {
+                   text.textContent = "Night!"
+            } else{
+                text.textContent = "Day!"
+            }
+        })
+    </script>
+</body>
+</html>

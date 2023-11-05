@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Watches</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            transition: 0.2s;
+        }
+
+        body{
+            background: #1F1F1F;
+            color: #fff;
+        }
+
+        .nav{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            font-size: 20px;
+            background: #000;
+            position: relative;
+        }
+
+        .nav h1, p{
+            background: #000;
+        }
+
+        .switch{
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            cursor: pointer;
+        }
+
+        body.active{
+            background: #f5f5f5;
+            color: black;
+        }
+
+        body.active .nav, body.active .nav h1, body.active .nav p{
+            background: #fdf5e6;
+        }
+
+        .watch img{
+            width: 250px;
+        }
+
+        .watch{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 100px;
+            margin-top: 20px;
+        }
+
+        .watch .text{
+            border: 1px solid white;
+            border-top: none;
+            width: 250px;
+            margin-top: -3px;
+            padding-top: 20px;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-bottom: 20px;
+            border-radius: 0 0 10px 10px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        body.active .watch .text{
+            border: 1px solid black;
+            border-top: none;
+        }
+
+        .watch .text h1{
+            display: inline-block;
+        }
+
+        .scroll{
+            animation: marquee 5s linear infinite;
+        }
+
+        @keyframes marquee {
+            0%{ transform: translateX(80%); }
+            100%{ transform: translateX(-110%); }
+        }
+
+        a{
+            text-decoration: none;
+            color: white;
+        }
+
+        body.active a{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="nav">
+            <h1>All Watches</h1>
+            <div class="switch"><p class="textp">Day!</p></div>
+        </div>
+        <div class="main">
+            {%for i in watch%}
+            <a href="/watch/{{i.id}}/">
+                <div class="watch">
+                    <div class="img">
+                        <img src="{{i.image.url}}">
+                    </div>
+                    <div class="text">
+                        <h1 class="scrolling-text">{{i.name}}</h1>
+                        <h2>{{i.brand.name}}</h2>
+                        <sub>${{i.price}}</sub>
+                    </div>
+                </div>
+            </a>
+            {%endfor%}
+        </div>
+    </center>
+
+    <script>
+        var switcher = document.querySelector(".switch")
+        var body = document.querySelector("body")
+        var text = document.querySelector(".textp")
+        const textContainer = document.querySelector('.watch');
+        const scrollingText = document.querySelector('.scrolling-text');
+
+        if (scrollingText.scrollWidth > textContainer.clientWidth) {
+            scrollingText.classList.add('scroll');
+        }
+
+
+        switcher.addEventListener("click", () => {
+            body.classList.toggle("active")
+
+            if (body.classList.contains("active")) {
+                   text.textContent="Night!"
+            } else{
+                text.textContent="Day!"
+            }
+        })
+    </script>
+</body>
+</html>
